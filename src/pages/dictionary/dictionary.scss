@@ -1,0 +1,10 @@
+@import '../../styles/variables.scss';
+
+.dictionary {
+  padding: 20px;
+  width: 500px;
+  max-width: 500px;
+  p {
+    color: $text-gray;
+  }
+}

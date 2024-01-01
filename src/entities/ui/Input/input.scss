@@ -1,0 +1,29 @@
+.input-box {
+  .input {
+    width: 200px;
+    background-color: white;
+    padding: 10px;
+    border: 1px solid #dbdbdb;
+    border-radius: 15px;
+    outline: none;
+    &::placeholder {
+      color: #919191;
+    }
+    &:focus {
+      color: #000000;
+      font-weight: 700;
+    }
+  }
+
+  .button {
+    margin-left: 20px;
+    padding: 10px;
+    border-radius: 15px;
+    border: 1px solid #dbdbdb;
+    background-color: white;
+    &:hover {
+      background: #ffb444;
+      cursor: pointer;
+    }
+  }
+}

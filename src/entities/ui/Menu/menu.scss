@@ -1,0 +1,54 @@
+.menu {
+  display: flex;
+  flex-direction: column;
+
+  .titile-wrapper {
+    display: flex;
+    button {
+      display: block;
+      padding: 10px;
+      background-color: transparent;
+      border: none;
+      cursor: pointer;
+      .arrow-back {
+        width: 24px;
+        height: 24px;
+      }
+    }
+  }
+  .menu-block {
+    margin-top: 8px;
+    border-top: 1px solid gray;
+    .item__title {
+      display: block;
+      margin-top: 8px;
+      font-size: 11px;
+      text-transform: uppercase;
+      color: #919191;
+    }
+    .item {
+      margin-top: 18px;
+      margin-left: 24px;
+      .item-link {
+        display: block;
+        padding: 8px;
+        border-radius: 5px;
+        color: black;
+        text-decoration: none;
+        font-size: 24px;
+        font-weight: 700;
+        user-select: none;
+
+        .item__logo {
+          margin-right: 8px;
+          width: 24px;
+          height: 24px;
+          vertical-align: middle;
+        }
+        &:hover {
+          background-color: #ffb444;
+        }
+      }
+    }
+  }
+}
