@@ -1,0 +1,29 @@
+.quizcardslist {
+  .quiz-card-box {
+    margin-top: 20px;
+    .quiz-text {
+      text-align: center;
+      span {
+        text-transform: capitalize;
+        font-weight: 700;
+        color: #e68c05;
+      }
+    }
+    .quiz-card-variants {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-template-rows: 1fr 1fr;
+      gap: 20px;
+      .quiz-card-variant {
+        text-transform: capitalize;
+        padding: 5px;
+        border: 1px solid gray;
+        border-radius: 15px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
+      }
+    }
+  }
+}

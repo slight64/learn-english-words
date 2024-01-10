@@ -1,2 +1,13 @@
 .quiz {
+  width: 400px;
+  .quiz-card {
+    display: flex;
+    flex-direction: column;
+    .quiz-title {
+      text-align: center;
+    }
+    .quiz-card-description {
+      margin-top: 40px;
+    }
+  }
 }

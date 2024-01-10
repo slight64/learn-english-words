@@ -1,22 +1,31 @@
+import { useEffect } from 'react';
 import Input from '../../entities/ui/Input/Input';
+
 import Loader from '../../entities/ui/Loader/Loader';
 import WordCard from '../../entities/ui/WordCard/WordCard';
-import { useAppSelector } from '../../features/redux/hooks';
+import { useAppDispatch, useAppSelector } from '../../features/redux/hooks';
 import './dictionary.scss';
+import { createDictionaryFromStorage } from '../../features/dictionary/dictionarySlice';
 
 const Dictionary = () => {
-  const data = useAppSelector((state) => state.dictionaryReducer.words);
-  const loading = useAppSelector((state) => state.dictionaryReducer.loading);
-  if (loading) {
-    return <Loader className="loader" />;
-  }
+  const data = useAppSelector((state) => state.dictionary.words);
+  const dispatch = useAppDispatch();
+  useEffect(() => {
+    dispatch(createDictionaryFromStorage());
+  }, []);
+
   return (
     <div className="dictionary">
       <Input />
       <h1>Словарь</h1>
-      {data.map((word) => (
-        <WordCard {...word} key={word.id} />
-      ))}
+      {data &&
+        data.map((word) => {
+          if (word.loading) {
+            return <Loader className="loader" key={word.id} sm={true} />;
+          }
+
+          return <WordCard {...word} key={word.id} />;
+        })}
     </div>
   );
 };

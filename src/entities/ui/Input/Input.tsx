@@ -7,6 +7,9 @@ const Input = () => {
   const [state, setState] = useState('');
   const dispatch = useAppDispatch();
   const handleClick = () => {
+    if (state === '') {
+      return;
+    }
     dispatch(fetchTranslate(state));
   };
   const inputHandler = (event: React.ChangeEvent<HTMLInputElement>) => {
