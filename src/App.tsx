@@ -3,8 +3,10 @@ import './App.scss';
 import Dictionary from './pages/dictionary/Dictionary';
 import Menu from './entities/ui/Menu/Menu';
 import { Provider } from 'react-redux';
-import { store } from './features/redux';
+import { store, persistor } from './features/redux';
 import Quiz from './pages/Quiz/Quiz';
+import { PersistGate } from 'redux-persist/integration/react';
+import Loader from './entities/ui/Loader/Loader';
 
 function App() {
   const Layout = () => {
@@ -36,7 +38,9 @@ function App() {
 
   return (
     <Provider store={store}>
-      <RouterProvider router={router} />
+      <PersistGate loading={<Loader />} persistor={persistor}>
+        <RouterProvider router={router} />
+      </PersistGate>
     </Provider>
   );
 }

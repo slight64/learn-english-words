@@ -1,9 +1,4 @@
 import { createSlice, PayloadAction, createAsyncThunk } from '@reduxjs/toolkit';
-import {
-  getFromLocalStorage,
-  removeFromLocalStorage,
-  saveInLocalStorage,
-} from '../../widgets/db/dataBase';
 
 export type Word = {
   id: string;
@@ -55,7 +50,6 @@ export const fetchTranslate = createAsyncThunk<Word, string>(
         translated: translated,
         loading: false,
       };
-      saveInLocalStorage('words', completedResult);
       return completedResult;
     } catch (error) {}
     return rejectWithValue(Error);
@@ -66,10 +60,6 @@ export const dictionarySlice = createSlice({
   name: 'dictionary',
   initialState,
   reducers: {
-    createDictionaryFromStorage: (state: Words) => {
-      const words = getFromLocalStorage('words');
-      state.words = words;
-    },
     addWord: (state, action: PayloadAction<Word>) => {
       state.words.push(action.payload);
     },
@@ -77,7 +67,6 @@ export const dictionarySlice = createSlice({
       state.words = state.words.filter((word) => {
         return word.id !== action.payload;
       });
-      removeFromLocalStorage('words', action.payload);
     },
   },
   extraReducers: (builder) => {
@@ -99,6 +88,5 @@ export const dictionarySlice = createSlice({
   },
 });
 
-export const { addWord, createDictionaryFromStorage, removeWord } =
-  dictionarySlice.actions;
+export const { addWord, removeWord } = dictionarySlice.actions;
 export default dictionarySlice.reducer;

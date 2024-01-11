@@ -1,5 +1,5 @@
 type Props = {
-  className: string;
+  className?: string;
   sm?: boolean;
 };
 import './loader.scss';
