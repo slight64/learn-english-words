@@ -1,9 +1,25 @@
 @import '../../styles/variables.scss';
 
 .dictionary {
+  .dictionary-table {
+    td,
+    th {
+      border: 1px solid;
+      padding: 8px;
+    }
+  }
+  .dictionary-title {
+    border-top: 1px solid gray;
+    margin-top: 30px;
+    padding-top: 10px;
+  }
   padding: 20px;
-  width: 500px;
+  width: 600px;
+  min-height: 500px;
   max-width: 500px;
+  display: flex;
+  flex-direction: column;
+
   p {
     color: $text-gray;
   }

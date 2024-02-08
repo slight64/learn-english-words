@@ -1,0 +1,15 @@
+.pagination {
+  margin-top: 10px;
+  align-self: flex-start;
+  .pagination-item {
+    &:not(:first-child) {
+      margin-left: 10px;
+    }
+    border-radius: 100%;
+    border: 1px solid gray;
+    background: #fff;
+    outline: none;
+    width: 28px;
+    height: 28px;
+  }
+}

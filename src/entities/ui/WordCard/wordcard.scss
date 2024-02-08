@@ -1,10 +1,7 @@
 .wordcard {
-  display: flex;
-  justify-content: space-between;
+  width: 440px;
   position: relative;
-  align-items: center;
   padding: 10px;
-  border-bottom: 1px solid #919191;
   .hidden {
     display: none;
   }
@@ -17,8 +14,6 @@
     border: none;
     cursor: pointer;
     animation: background-color 1s ease-in-out;
-    :hover {
-    }
   }
   .original {
     font-weight: 600;
@@ -26,8 +21,8 @@
     text-transform: capitalize;
   }
   .translated {
-    justify-self: flex-end;
-
+    display: flex;
+    justify-content: space-between;
     color: #313131;
     font-weight: 600;
     text-transform: capitalize;

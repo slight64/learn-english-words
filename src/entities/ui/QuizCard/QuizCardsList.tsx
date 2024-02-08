@@ -6,6 +6,7 @@ import { useAppDispatch } from '../../../features/redux/hooks';
 import {
   calculateQuizCards,
   correctAnswer,
+  startQuiz,
 } from '../../../features/dictionary/quizSlice';
 import { useEffect, useState } from 'react';
 
@@ -33,8 +34,12 @@ const QuizCardsList = (props: Props) => {
   const correctAnswerHandler = () => {
     dispatch(correctAnswer());
   };
+  const onRestartQuiz = () => {
+    setStep(0);
+    dispatch(startQuiz());
+  };
   if (!props.wordsArray) {
-    return <>Нет слов</>;
+    return <>У вас нет слов в словаре</>;
   }
   //Создание массива из случайных слов
   const quizArray = props.wordsArray.map((word) => {
@@ -45,13 +50,6 @@ const QuizCardsList = (props: Props) => {
 
     let random = rollRandom(3);
     arr[random] = word.translated;
-
-    // const filtered: string[] = arr.map((el) => {
-    //   // Сделать нормальный алгоритм подбора случайных слов, сейчас эти блоки не работают.  функция выше просто заполняет массив случайными числами без фильтрации на похожие слова.
-
-    //   return el;
-    // });
-
     return {
       correct: word.translated,
       question: word.original,
@@ -66,8 +64,9 @@ const QuizCardsList = (props: Props) => {
   const cardVariants = (card: string[], correct: string) => {
     return card.map((el) => (
       <button
-        onClick={(e: React.MouseEvent<HTMLButtonElement>) => {
+        onClick={() => {
           setStep(step + 1);
+
           if (el === correct) {
             correctAnswerHandler();
           }
@@ -80,26 +79,19 @@ const QuizCardsList = (props: Props) => {
     ));
   };
 
-  //Создание карточек с вариантами из массива случайных слов
-  // const createCards = quizArray.map((card) => (
-  //   <div className="quiz-card-box" key={Math.random()}>
-  //     <p className="quiz-text">
-  //       Как переводится слово <span>{card.question}</span>?{' '}
-  //     </p>
-  //     <div className={`quiz-card-variants`}>
-  //       {cardVariants(card.array, card.correct)}
-  //     </div>
-  //   </div>
-  // ));
-
   //Создание карточек по шагам используя useState
   const cardsBySpep = () => {
     if (step === quizArray.length) {
       //Заменить заглушку на прохождение квиза, подсчет итогов и кнопка, чтобы начать заново
-      return <div>Вы прошли квиз</div>;
+      return (
+        <div>
+          <h2>Вы прошли квиз</h2>
+          <button onClick={onRestartQuiz}>Начать заново</button>
+        </div>
+      );
     }
     return (
-      <div className="quiz-card-box" key={Math.random()}>
+      <div className="quiz-card-box" key={quizArray[step].question}>
         <p className="quiz-text">
           Как переводится слово <span>{quizArray[step].question}</span>?{' '}
         </p>

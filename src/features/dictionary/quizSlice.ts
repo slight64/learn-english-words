@@ -21,7 +21,9 @@ export const quizSlice = createSlice({
     calculateQuizCards: (state: Quiz, action: PayloadAction<number>) => {
       state.total = action.payload;
     },
-    startQuiz: (state: Quiz, action: PayloadAction) => {},
+    startQuiz: (state: Quiz) => {
+      state.correctAnswers = 0;
+    },
 
     correctAnswer: (state: Quiz) => {
       state.correctAnswers += 1;

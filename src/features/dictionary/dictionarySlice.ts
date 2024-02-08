@@ -46,7 +46,7 @@ export const fetchTranslate = createAsyncThunk<Word, string>(
       const createID = original + translated;
       const completedResult = {
         id: createID,
-        original: original,
+        original: original.toLocaleLowerCase(),
         translated: translated,
         loading: false,
       };
@@ -68,6 +68,16 @@ export const dictionarySlice = createSlice({
         return word.id !== action.payload;
       });
     },
+    sortWordsByAlphabet: (state, action) => {
+      if (action.payload === 'alphabet') {
+        state.words = state.words.sort((a, b): number => {
+          if (a.original < b.original) {
+            return -1;
+          }
+          return 0;
+        });
+      }
+    },
   },
   extraReducers: (builder) => {
     builder
@@ -88,5 +98,6 @@ export const dictionarySlice = createSlice({
   },
 });
 
-export const { addWord, removeWord } = dictionarySlice.actions;
+export const { addWord, removeWord, sortWordsByAlphabet } =
+  dictionarySlice.actions;
 export default dictionarySlice.reducer;

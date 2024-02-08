@@ -6,15 +6,14 @@
     border: 1px solid #dbdbdb;
     border-radius: 15px;
     outline: none;
-    &::placeholder {
-      color: #919191;
-    }
-    &:focus {
-      color: #000000;
-      font-weight: 700;
-    }
+    transition: all 1s;
   }
 
+  .input:focus::placeholder {
+    transition: all 0.1s;
+    color: #000000;
+    font-size: 14px;
+  }
   .button {
     margin-left: 20px;
     padding: 10px;
@@ -25,5 +24,17 @@
       background: #ffb444;
       cursor: pointer;
     }
+  }
+}
+@keyframes textSize1 {
+  0% {
+    color: gray;
+  }
+  100% {
+    color: #000000;
+    text-shadow: -1px -1px 0 #000000;
+    text-shadow: 1px -1px 0 #000000;
+    text-shadow: -1px 1px 0 #000000;
+    text-shadow: 1px 1px 0 #000000;
   }
 }

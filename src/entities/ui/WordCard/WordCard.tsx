@@ -4,45 +4,76 @@ import './wordcard.scss';
 import TrashIcon from '../../logos/TrashIcon';
 import { useAppDispatch } from '../../../features/redux/hooks';
 import { removeWord } from '../../../features/dictionary/dictionarySlice';
+import Modal from '../Modal/Modal';
+import Button from '../Button/Button';
 
 interface IProps {
   original: string;
   translated: string;
   id: string;
 }
-
+enum iconStatus {
+  hidden = 'hidden',
+  shown = 'show',
+}
 const WordCard = (props: IProps) => {
-  const [hidden, setHidden] = useState('hidden');
+  const [isVisible, setIsVisible] = useState(false);
+  const [hidden, setHidden] = useState(iconStatus.hidden);
+
+  const openModal = () => {
+    setIsVisible(true);
+  };
+  const closeModal = () => {
+    setIsVisible(false);
+  };
   const { original, translated, id } = props;
   const dispatch = useAppDispatch();
+
   const onDeleteHandler = (id: string) => {
     dispatch(removeWord(id));
   };
+  const handle = () => {
+    closeModal();
+    setHidden(iconStatus.hidden);
+    onDeleteHandler(id);
+  };
+  const handleHideIcon = () => {
+    setHidden(iconStatus.hidden);
+  };
   return (
-    <div
+    <tr
       className="wordcard"
-      onMouseOver={() => {
-        setHidden('show');
+      onMouseOver={(e) => {
+        setHidden(iconStatus.shown);
       }}
       onMouseOut={() => {
-        setHidden('hidden');
+        setHidden(iconStatus.hidden);
       }}
     >
-      <div className="original">{original}</div>
+      <td className="original">{original}</td>
 
-      <div className="translated">
+      <td className="translated">
         {translated}
         <AddToFavorites ml={10} />
         <button
           className={hidden}
           onClick={() => {
-            onDeleteHandler(id);
+            openModal();
           }}
         >
           <TrashIcon />
         </button>
-      </div>
-    </div>
+      </td>
+      {isVisible && (
+        <Modal
+          isVisible={isVisible}
+          closeModal={closeModal}
+          handle={handleHideIcon}
+        >
+          <Button handle={handle}>Удалить</Button>
+        </Modal>
+      )}
+    </tr>
   );
 };
 
